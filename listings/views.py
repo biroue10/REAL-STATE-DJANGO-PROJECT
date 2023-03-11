@@ -1,6 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# Create your views here.
+from .models import Listing
+from .forms import ListingForm
 
-def list(request):
-    return 
+
+def listing_list(request):
+    listings = Listing.objects.all()
+    context = {'listings': listings}
+    return render(request, 'listings.html', context)
+
+def listing_retrieve(request, pk):
+    listings = Listing.objects.get(id=pk)
+    context = {'listings': listings}
+    return render(request, 'retrieve.html', context)
+
+def listing_create(request):
+    context = {'form':form}
+    form = ListingForm()
+    return render(request, 'listing_create.html', context)
+
