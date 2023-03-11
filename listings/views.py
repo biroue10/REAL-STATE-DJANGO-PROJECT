@@ -28,3 +28,22 @@ def listing_create(request):
 
     context = {'form': form}
     return render(request, 'listing_create.html', context)
+
+
+def listing_update(request, pk):
+
+    listings = Listing.objects.get(id=pk)
+    form = ListingForm(instance=listings)
+    if request.method == "POST":
+        form = ListingForm(request.POST, instance=listings)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    context = {'form': form}
+    return render(request, 'listing_update.html', context)
+
+def listing_delete(request, pk):
+    listings = Listing.objects.get(id=pk)
+    listings.delete()
+    return redirect("/")
+
