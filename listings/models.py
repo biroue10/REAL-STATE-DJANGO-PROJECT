@@ -9,4 +9,7 @@ class Listing(models.Model):
     address = models.TextField()
     #image = models.ImageField()
 
+    def __str__(self) -> str:
+        return self.title
+
 
