@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Listing
 from .forms import ListingForm
@@ -9,13 +9,22 @@ def listing_list(request):
     context = {'listings': listings}
     return render(request, 'listings.html', context)
 
+
 def listing_retrieve(request, pk):
     listings = Listing.objects.get(id=pk)
     context = {'listings': listings}
     return render(request, 'retrieve.html', context)
 
-def listing_create(request):
-    context = {'form':form}
-    form = ListingForm()
-    return render(request, 'listing_create.html', context)
 
+def listing_create(request):
+    form = ListingForm()
+    if request.method == "POST":
+        form = ListingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+
+        return
+
+    context = {'form': form}
+    return render(request, 'listing_create.html', context)
