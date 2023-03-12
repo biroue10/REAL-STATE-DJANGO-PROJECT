@@ -1,3 +1,10 @@
-<p> {{ listings.title }} </p>
-<p> {{ listings.price }} </p>
-<p> {{ listings.address }} </p>
+{% extends 'base.html' %}
+{% block content %}
+<div  class="px-3 py-2 bg-gray-100 rounded-sm">
+    <h3 class="text-3xl text-gray-900">{{ listings.title}}</h3>
+    <p class="text-gray-900">{{ listings.price }}</p>
+    <p class="text-gray-600 text-sm">{{ listings.address }}</p>
+    <a href="/listings/{{ listing.id }}/edit/" class="text-blue-500">Edit</a>
+    <a href="/listings/{{ listing.id }}/delete/" class="ml-9 text-blue-500">Delete</a>
+</div>
+{% endblock content %} 

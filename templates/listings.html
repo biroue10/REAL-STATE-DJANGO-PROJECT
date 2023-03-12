@@ -1,7 +1,11 @@
-{ % extends "base.html"% }
-
+{% extends "base.html" %}
+{% block content %}
 {% for listing in listings %}
-<p> <a href="/listings/{{ listing.id }}/">{{ listing.title }}</a> </p>
+<div  class="px-3 py-2 bg-gray-100 rounded-sm">
+    <h3 class="text-3xl text-gray-900">{{ listing.title}}</h3>
+    <a href="/listings/{{ listing.id }}/" class="text-blue-500">View details</a>
+</div>
+
 {% endfor %}
 
 {% endblock content %}
